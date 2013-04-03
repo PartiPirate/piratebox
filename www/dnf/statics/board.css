@@ -1,0 +1,35 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #fdfdfd;
+    color: #6b236e;
+    font-family: sans-serif;
+}
+
+p {
+    margin: 1em 0;
+    padding: 0;
+}
+
+section {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 1em 1em;
+}
+
+input, textarea {
+    border: 1px solid #6b236e;
+    border-radius: 5px;
+    padding: 0.5em;
+    width: 100%;
+}
+
+input[type='submit'] {
+    color: #fffffe;
+    background: #6b236e;
+    width: 100px;
+}
+
+input[type='submit']:hover {
+    background: #c4a9c6;
+}

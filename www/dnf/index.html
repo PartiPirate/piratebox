@@ -1,0 +1,115 @@
+<html>
+<head>
+    <title>Piratebox Board</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="statics/board.css">
+    <script type="text/javascript" src="statics/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+
+    <section>
+        <h1 id="title">PirateBox // Board</h1>
+        <div class="submit_box">
+            <form method="POST" action="#">
+                <p><label>Pseudo (optionnel)<br /><input id="id_pseudo" type="text" name="pseudo" value="" placeholder="Votre pseudo (optionnel)" /></label></p>
+                <p><label>Message*<br /><textarea id="id_message" type="text" name="message" placeholder="Votre message"></textarea></label></p>
+                <p><input type="submit" name="go" value="Envoyer" /></p>
+            </form>
+        </div>
+        <div class="messages_box">
+            Chargement des messages...
+        </div>
+    </section>
+
+    <script type="text/javascript">
+    /* Submit url used to POST the message. */
+    var SUBMIT_URL = 'submit.sh';
+    /* Messages url used to GET the list of json messages. */
+    var MESSAGES_URL = 'messages.json';
+    /* If True, the new posted message will be added on top of the list
+        => Latest messages are display first.
+       If False, the new posted message will be added at the bottom of the list.
+        => First messages are display first. */
+    var MESSAGE_PREPEND = true;
+
+    /**
+     * Build a STRING with <article><h1>...</h1><p>MESSAGE</p></article>.
+     * @param item must be an object with "message", "date"
+     *        and "pseudo" attribute.
+     */ 
+    function buildMessage(item) {
+        var d = new Date(item.date);
+        var escapedText = jQuery('<blockquote />').text(item.message).html();
+        var result = '<article>'
+            + '<h1>Par '
+            + item.pseudo
+            + ' le '
+            + d.toLocaleDateString()
+            + ' à '
+            + d.toLocaleTimeString()
+            + '</h1>'
+            + '<p><cite>' + escapedText + '</cite></p>'
+            + '</article>';
+        return result;
+    }
+
+    /**
+     * Ajax GET a list of message.
+     * Each message is append to the list of messages (the order of the
+     * message into the JSON data IS important !!!).
+     *
+     * You can configure the URL to GET the data with the directive
+     * `MESSAGES_URL`.
+     */
+    function loadMessages() {
+        jQuery.ajax({url: MESSAGES_URL, method: 'GET', dataType: 'json'})
+        .done(function (data) {
+            jQuery('.messages_box').html('');
+            for (var i=0; i < data.length; i++) {
+                jQuery('.messages_box').append(buildMessage(data[i]));
+            }
+        })
+        .fail(function () {
+            jQuery('.messages_box').html('<p>Impossible de charger les messages...</p>');
+        });
+    }
+
+    /*
+     * Bind the FORM using the `SUBMIT_URL` to publish a new message.
+     * When the form success, the message is displayed.
+     * See also `MESSAGE_PREPEND` to configure if the new posted message
+     * must be displayed ON TOP or AT THE BOTTOM of the list of messages.
+     */
+    jQuery(function () {
+        jQuery('.submit_box form').submit(function (event) {
+            event.preventDefault();
+            var values = {
+                          pseudo: jQuery('#id_pseudo').val(),
+                          message: jQuery('#id_message').val(),
+                          date: new Date()
+            };
+
+            if (values.message == '' || values.messages == undefined) {
+                alert('Le message ne doit pas être vide !');
+            }
+
+            if (values.pseudo == '' || values.pseudo == undefined) {
+                values.pseudo = 'Anonyme';
+            }
+
+            jQuery.ajax({url: SUBMIT_URL, method: 'POST', data: values})
+                  .complete(function () {
+                      jQuery('.submit_box').html('<p>Merci pour le message !</p>');
+                      if (MESSAGE_PREPEND) {
+                          jQuery('.messages_box').prepend(buildMessage(values));
+                      } else {
+                          jQuery('.messages_box').append(buildMessage(values));
+                      }
+                  });
+        });
+
+        loadMessages();
+    });
+    </script>
+</body>
+</html>
