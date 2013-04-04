@@ -17,6 +17,7 @@ else:
   exit('Un message est obligatoire !');
 datapass = re.sub("<", "&lt;", rawdata)
 data = re.sub("\"", "&quot;", datapass)
+name = re.sub("\"", "&quot;", name)
 curdate = datetime.datetime.now()
 old = datafile.read()
 old = re.sub("]$", "", old)
