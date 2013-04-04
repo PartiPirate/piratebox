@@ -5,7 +5,7 @@
 
 
 import cgi, datetime, os, re
-datafile = open("messages.json", 'r+')
+datafile = open("../dnf/messages.json", 'r+')
 values = cgi.FieldStorage()
 if values.has_key("pseudo"):
   name = values["pseudo"].value
@@ -22,7 +22,7 @@ old = datafile.read()
 old = re.sub("]$", "", old)
 datafile.truncate(0)
 datafile.close()
-datafile = open("messages.json", 'r+')
+datafile = open("../dnf/messages.json", 'r+')
 datafile.write(old + ", {\"date\": \"" + curdate.strftime("%Y-%m-%dT%H:%M:%SZ") + "\", \"pseudo\": \"" + name + "\", \"message\": \"" + data + "\"}\n]")
 datafile.close()
 print "Success"

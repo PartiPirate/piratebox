@@ -2,15 +2,16 @@
 <head>
     <title>404 - Democracy Not Found</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="/statics/generic.css">
-    <link rel="stylesheet" type="text/css" href="/dnf/statics/dnf.css">
-    <script type="text/javascript" src="/statics/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="/dnf/statics/dnf.js"></script>
+    <link rel="stylesheet" type="text/css" href="../statics/generic.css">
+    <!--link rel="stylesheet" type="text/css" href="../dnf/statics/dnf.css"-->
+    <script type="text/javascript" src="../statics/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../dnf/statics/dnf.js"></script>
 </head>
 <body>
 
     <section>
         <h1 id="title">404 - Democracy Not Found // PirateBox</h1>
+		<p>Que manque-t-il à nos démocraties ? Comment les améliorer ? Contribuez ci-dessous en quelques mots avec votre réponse à ces questions. Vous pouvez aussi y répondre en twittant avec le hashtag #404DNF.</p>
         <div class="submit_box">
             <form method="POST" action="#">
                 <p><label>Ce qui manque a nos démocratie, c'est ... <br /><textarea id="id_message" type="text" name="message" placeholder="Ce qui manque a nos démocratie, c'est ... "></textarea></label></p>
@@ -18,6 +19,9 @@
                 <p><input type="submit" name="go" value="Envoyer" /></p>
             </form>
         </div>
+		<p>Dans un second temps, l’ensemble des contributions sera compilée et une synthèse en sera publiée.</p>
+		<p>N'hésitez pas à consulter le site <a href="http://www.404democracynotfound.org/-les-initiatives-.html">http://www.404democracynotfound.org</a> pour découvrir différentes formes de démocraties, les sophismes permettant de truquer l'argumentation et de plusieurs organisations militantes pour un accès différent à la démocratie citoyenne avec des démarches souvent novatrices.</p>
+		<h2>Les autres contributions :</h2>
         <div class="messages_box">
             Chargement des messages...
         </div>
@@ -25,9 +29,9 @@
 
     <script type="text/javascript">
     /* Submit url used to POST the message. */
-    var SUBMIT_URL = '/dnf/cgi-bin/post.py';
+    var SUBMIT_URL = '../dnf/cgi-bin/post.py';
     /* Messages url used to GET the list of json messages. */
-    var MESSAGES_URL = '/dnf/cgi-bin/messages.json';
+    var MESSAGES_URL = 'messages.json';
     /* If True, the new posted message will be added on top of the list
         => Latest messages are display first.
        If False, the new posted message will be added at the bottom of the list.
