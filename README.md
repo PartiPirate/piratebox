@@ -33,12 +33,12 @@ Les actions qui suivent sont temporaire en attendant qu'un problème de configur
 
 * Après reboot, il faut modifier /etc/config/wireless pour changer le nom du wifi en 404DemocracyNotFound#1 (ou un autre numéro s'il y a plusieur box)
 * cd /opt/piratebox/www/
-* rm -r chat.html favicon.ico forum.html index.html jquery.min.js piratebox-logo* style.css cgi-bi
-n/psoread.py cgi-bin/psowrte.py board/ 
+* rm -r chat.html favicon.ico forum.html index.html jquery.min.js piratebox-logo* style.css cgi-bin/psoread.py cgi-bin/psowrte.py board/ 
 * cp /mnt/usb/piratebox/www/index.html index.html
 * ln -s /mnt/usb/piratebox/www/dnf dnf
 * ln -s /mnt/usb/piratebox/www/statics/ statics
 * ln -s /mnt/usb/piratebox/www/favicon.ico favicon.ico
+* ln -s /mnt/usb/piratebox/www/dnf/messages.json cgi-bin/messages.json
 * cp /mnt/usb/piratebox/www/dnf/cgi-bin/* cgi-bin/.
 * chmod 777 . -R && chown nobody:nogroup . -R (qq warning : pas d'inquiétudes)
 * vérifiez l'heure : date  (et éventuellement, corrigez : date -s "2013-04-04 06:00:00" Attention, heure en UTC donc -2h)
